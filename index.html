@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>JamilTrix — Premium Web Templates</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --accent:#ff0055;--accent2:#ffcc00;--accent3:#00eaff;
+    --bg:#ffffff;--text:#000000;
+    --border:4px solid #000;--shadow:8px 8px 0 #000;
+    --ff-head:'Bebas Neue',sans-serif;--ff-body:'Space Mono',monospace;
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:var(--ff-body);overflow-x:hidden;cursor:none;}
+
+  .cursor{position:fixed;width:18px;height:18px;background:var(--accent);border:3px solid #000;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s,background .15s;}
+  .cursor.big{width:48px;height:48px;background:var(--accent2);}
+
+  .grid-bg{position:fixed;inset:0;z-index:-1;background-image:linear-gradient(rgba(0,0,0,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.05) 1px,transparent 1px);background-size:48px 48px;}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:60px;background:var(--bg);border-bottom:var(--border);}
+  .logo{font-family:var(--ff-head);font-size:1.9rem;letter-spacing:4px;text-decoration:none;color:var(--text);}
+  .logo span{color:var(--accent);}
+  .nav-tag{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;border:2px solid #000;padding:6px 14px;background:var(--accent2);}
+
+  .hero{padding:100px 28px 60px;border-bottom:var(--border);}
+  .hero-eyebrow{display:inline-block;background:var(--accent);color:#fff;font-size:.65rem;letter-spacing:3px;text-transform:uppercase;font-weight:700;padding:6px 16px;border:2px solid #000;margin-bottom:20px;}
+  .hero h1{font-family:var(--ff-head);font-size:clamp(4rem,18vw,9rem);line-height:.88;text-transform:uppercase;letter-spacing:-2px;margin-bottom:20px;}
+  .hero h1 .outline{-webkit-text-stroke:3px #000;color:transparent;}
+  .hero h1 .red{color:var(--accent);}
+  .hero-sub{font-size:.75rem;line-height:2;color:#333;max-width:480px;margin-bottom:28px;}
+
+  .stats-bar{display:grid;grid-template-columns:repeat(3,1fr);border:var(--border);margin-bottom:0;}
+  .stat-cell{padding:18px 16px;border-right:var(--border);text-align:center;transition:background .15s;}
+  .stat-cell:last-child{border-right:none;}
+  .stat-cell:hover{background:var(--accent2);}
+  .stat-num{font-family:var(--ff-head);font-size:2.6rem;line-height:1;}
+  .stat-key{font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:4px;}
+
+  .marquee-wrap{overflow:hidden;border-top:var(--border);border-bottom:var(--border);background:var(--accent);padding:12px 0;}
+  .marquee-inner{display:flex;animation:marquee 16s linear infinite;width:max-content;}
+  .marquee-item{white-space:nowrap;font-family:var(--ff-head);font-size:1.4rem;letter-spacing:4px;color:#fff;padding:0 32px;border-right:3px solid rgba(255,255,255,.35);}
+  .marquee-item span{color:var(--accent2);}
+  @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  .sec-header{padding:48px 28px 32px;border-bottom:var(--border);}
+  .sec-label{font-size:.62rem;letter-spacing:3px;text-transform:uppercase;font-weight:700;border-left:5px solid var(--accent);padding-left:12px;margin-bottom:12px;display:inline-block;}
+  .sec-title{font-family:var(--ff-head);font-size:clamp(2.4rem,8vw,5rem);line-height:.9;text-transform:uppercase;letter-spacing:-1px;}
+  .sec-title em{font-style:normal;-webkit-text-stroke:2px #000;color:transparent;}
+
+  .tmpl-row{display:grid;grid-template-columns:56px 1fr;border-bottom:var(--border);cursor:none;position:relative;}
+  .tmpl-row:hover{background:#fafafa;}
+  .tmpl-num-col{border-right:var(--border);display:flex;align-items:flex-start;justify-content:center;padding-top:24px;font-family:var(--ff-head);font-size:1.1rem;color:#bbb;transition:color .15s;}
+  .tmpl-row:hover .tmpl-num-col{color:var(--accent);}
+  .tmpl-body{padding:24px 20px;}
+  .tmpl-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px;}
+  .tmpl-name{font-family:var(--ff-head);font-size:clamp(1.8rem,6vw,3rem);line-height:.95;text-transform:uppercase;letter-spacing:.5px;transition:color .15s;}
+  .tmpl-row:hover .tmpl-name{color:var(--accent);}
+  .tmpl-tags{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding-top:6px;}
+  .tag{font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;padding:4px 10px;border:2px solid #000;}
+  .tag-red{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .tag-gold{background:var(--accent2);color:#000;border-color:#000;}
+  .tag-cyan{background:var(--accent3);color:#000;border-color:#000;}
+  .tag-plain{background:#000;color:#fff;}
+  .tmpl-desc{font-size:.72rem;line-height:1.9;color:#444;margin-bottom:16px;max-width:520px;}
+  .tmpl-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;}
+  .chip{font-size:.6rem;letter-spacing:1.2px;text-transform:uppercase;font-weight:700;padding:4px 10px;border:1.5px solid #000;color:#333;background:#fff;}
+  .tmpl-btns{display:flex;gap:10px;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border:3px solid #000;font-family:var(--ff-body);font-weight:700;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;cursor:none;transition:transform .1s,box-shadow .1s,background .1s,color .1s;color:var(--text);background:var(--bg);}
+  .btn:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 #000;}
+  .btn-buy{background:var(--accent);color:#fff;border-color:#000;}
+  .btn-buy:hover{background:#000;color:var(--accent2);box-shadow:6px 6px 0 var(--accent);}
+
+  footer{border-top:var(--border);padding:24px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;background:#000;color:#fff;}
+  .footer-logo{font-family:var(--ff-head);font-size:1.5rem;letter-spacing:4px;}
+  .footer-logo span{color:var(--accent);}
+  .footer-copy{font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:#aaa;}
+  .footer-tag{background:var(--accent);color:#fff;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:6px 14px;border:2px solid #fff;}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .55s ease,transform .55s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  @media(max-width:600px){
+    nav{padding:0 14px;}
+    .hero{padding:88px 14px 40px;}
+    .sec-header{padding:32px 14px 20px;}
+    .tmpl-num-col{display:none;}
+    .tmpl-row{grid-template-columns:1fr;}
+    .tmpl-body{padding:16px 14px;}
+    footer{padding:18px 14px;}
+  }
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<div class="cursor" id="cursor"></div>
+
+<nav>
+  <a href="#" class="logo">JAMIL<span>T</span>RIX</a>
+  <div class="nav-tag">✦ Premium Store</div>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">⬛ 2025–2026 Template Collection — 11 Designs</div>
+  <h1>
+    <span class="outline">PREMIUM</span><br/>
+    <span>WEB</span><br/>
+    <span class="red">TEMPLATES.</span>
+  </h1>
+  <p class="hero-sub">Handcrafted HTML templates for developers, creatives &amp; agencies.<br/>Preview live → buy once → own forever. No subscriptions.</p>
+  <div class="stats-bar">
+    <div class="stat-cell"><div class="stat-num">11</div><div class="stat-key">Templates</div></div>
+    <div class="stat-cell"><div class="stat-num">100%</div><div class="stat-key">Pure HTML</div></div>
+    <div class="stat-cell"><div class="stat-num">2026</div><div class="stat-key">Design</div></div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <div class="marquee-item">PORTFOLIO <span>✦</span></div><div class="marquee-item">GLASSMORPHISM <span>✦</span></div><div class="marquee-item">LUXURY <span>✦</span></div><div class="marquee-item">BRUTALIST <span>✦</span></div><div class="marquee-item">MINIMAL <span>✦</span></div><div class="marquee-item">DARK MODE <span>✦</span></div><div class="marquee-item">AI THEMED <span>✦</span></div><div class="marquee-item">RESPONSIVE <span>✦</span></div>
+    <div class="marquee-item">PORTFOLIO <span>✦</span></div><div class="marquee-item">GLASSMORPHISM <span>✦</span></div><div class="marquee-item">LUXURY <span>✦</span></div><div class="marquee-item">BRUTALIST <span>✦</span></div><div class="marquee-item">MINIMAL <span>✦</span></div><div class="marquee-item">DARK MODE <span>✦</span></div><div class="marquee-item">AI THEMED <span>✦</span></div><div class="marquee-item">RESPONSIVE <span>✦</span></div>
+  </div>
+</div>
+
+<section>
+  <div class="sec-header reveal">
+    <div class="sec-label">All Templates</div>
+    <h2 class="sec-title">Browse.<br/><em>Preview. Buy.</em></h2>
+  </div>
+
+  <div class="tmpl-row reveal">
+    <div class="tmpl-num-col">01</div>
+    <div class="tmpl-body">
+      <div class="tmpl-top"><div class="tmpl-name">Dev.Portfolio</div><div class="tmpl-tags"><span class="tag tag-red">🔥 Bestseller</span><span class="tag tag-gold">💎 Premium</span></div></div>
+      <p class="tmpl-desc">Modern 3D Glassmorphism developer portfolio. Commands attention with bold depth, futuristic glass layers and smooth scroll animations.</p>
+      <div class="tmpl-chips"><span class="chip">3D Effects</span><span class="chip">Glassmorphism</span><span class="chip">Dark Mode</span><span class="chip">Responsive</span></div>
+      <div class="tmpl-btns"><a href="https://jamil478.github.io/Modern-3D-Glassmorphism-Developer-Portfolio-Template/" target="_blank" class="btn">👁 Preview →</a><a href="https://jamiltrix.gumroad.com/l/xemhza" target="_blank" class="btn btn-buy">🛒 Buy Now →</a></div>
+    </div>
+  </div>
+
+  <div class="tmpl-row reveal">
+    <div class="tmpl-num-col">02</div>
+    <div class="tmpl-body">
+      <div class="tmpl-top"><div class="tmpl-name">Alex Morgan</div><div class="tmpl-tags"><span class="tag tag-cyan">✨ New</span><span class="tag tag-plain">⭐ Popular</span></div></div>
+      <p class="tmpl-desc">Creative developer portfolio with immersive animations and a bold editorial layout — makes your work impossible to ignore.</p>
+      <div class="tmpl-chips"><span class="chip">Editorial Layout</span><span class="chip">Smooth Scroll</span><span class="chip">Bold Typography</span><span class="chip">Interactive</span></div>
+      <div class="tmpl-btns"><a href="https://jamil478.github.io/Alex-Morgan-Creative-Developer/" target="_blank" class="btn">👁 Preview →</a><a href="https://jamiltrix.gumroad.com/l/3d-portfolio-template" target="_blank" class="btn btn-buy">🛒 Buy Now →</a></div>
+    </div>
+  </div>
+
+  <div class="tmpl-row reveal">
+    <div class="tmpl-num-col">03</div>
+    <div class="tmpl-body">
+      <div class="tmpl-top"><div class="tmpl-name">NEXUS.ECO</div><div class="tmpl-tags"><span class="tag tag-red">🔥 Trending</span><span class="tag tag-cyan">✨ New</span></div></div>
+      <p class="tmpl-desc">AI-powered portfolio with futuristic eco-tech aesthetic. Perfect for AI researchers, tech founders and innovators who want to stand out.</p>
+      <div class="tmpl-chips"><span class="chip">AI Aesthetic</span><span class="chip">Eco-Tech</span><span class="chip">Particle BG</span><span class="chip">Futuristic</span></div>
+      <div class="tmpl-btns"><a href="https://jamil478.github.io/nexus-ai-portfolio/" target="_blank" class="btn">👁 Preview →</a><a href="https://jamiltrix.gumroad.com/l/nexus-ai-portfolio" target="_blank" class="btn btn-buy">🛒 Buy Now →</a></div>
+    </div>
+  </div>
+
+  <div class="tmpl-row reveal">
+    <div class="tmpl-num-col">04</div>
+    <div class="tmpl-body">
+      <div class="tmpl-top"><div class="tmpl-name">Notion OS</div><div class="tmpl-tags"><span class="tag tag-plain">⭐ Popular</span><span class="tag tag-gold">💎 Premium</span></div></div>
+      <p class="tmpl-desc">Minimal OS-inspired portfolio. Elegant, distraction-free design that lets your content breathe and command total focus.</p>
+      <div class="tmpl-chips"><span class="chip">Minimal Design</span><span class="chip">OS Inspired</span><span class="chip">Clean Layout</span><span class="chip">Fast Load</span></div>
+      <div class="tmpl-btns"><a href="https://jamil478.github.io/Notion-OS-/" target="_blank" class="btn">👁 Preview →</a><a href="https://jamiltrix.gumroad.com/l/apotq" target="_blank" class="btn btn-buy">🛒 Buy Now →</a></div>
+    </div>
+  </div>
+
+  <div class="tmpl-row reveal">
+    <div class="tmpl-num-col">05</div>
+    <div class="tmpl-body">
+      <div class="tmpl-top"><div class="tmpl-name">AURA FEMME</div><div class="tmpl-tags"><span class="tag tag-cyan">✨ New</span><span class="tag tag-gold">💎 Premium</span></div></div>
+      <p class="tmpl-desc">Sophisticated feminine portfolio with soft gradients, elegant curves and unmistakable luxury brand presence. Built to convert.</p>
+      <div class="tmpl-chips"><span class="chip">Elegant Design</span><span class="chip">Soft Palette</span><span class="chip">Luxury Feel</span><span class="chip">Brand Ready</span></div>
+      <div class="tmpl-btns"><a href="https://jamil478.github.io/AURA-FEMME/" target="_blank" class="btn">👁 Preview →</a><a href="https://jamiltrix.gumroad.com/l/aura-femme-template" target="_blank" class="btn btn-buy">🛒 Buy Now →</a></div>
+    </div>
+  </div>
+
+  <div class="tmpl-row reveal">
+    <div class="tmpl-num-col">06</div>
+    <div class="tmpl-body">
+      <div class="tmpl-top"><div class="tmpl-name">AURA LUXURY</div><div class="tmpl-tags"><span class="tag tag-red">🔥 Bestseller</span><span class="tag tag-gold">👑 Luxury</span></div></div>
+      <p class="tmpl-desc">Gold-accented ultra-premium portfolio. Designed for high-end brands, luxury agencies and elite personal portfolios that demand respect.</p>
+      <div class="tmpl-chips"><span class="chip">Gold Accents</span><span class="chip">Ultra Premium</span><span class="chip">High End</span><span class="chip">Refined UX</span></div>
+      <div class="tmpl-btns"><a href="https://jamil478.github.io/AURA-LUXURY/" target="_blank" class="btn">👁 Preview →</a><a href="https://jamiltrix.gumroad.com/l/bdpbs" target="_blank" class="btn btn-buy">🛒 Buy Now →</a></div>
+    </div>
+  </div>
+
+  <div class="tmpl-row reveal">
+    <div class="tmpl-num-col">07</div>
+    <div class="tmpl-body">
+      <div class="tmpl-top"><div class="tmpl-name">ZENITH</div><div class="tmpl-tags"><span class="tag tag-plain">⭐ Popular</span></div></div>
+      <p class="tmpl-desc">Premium minimalist architecture website. Clean geometry, sophisticated white space — built for architectural firms, studios and agencies.</p>
+      <div class="tmpl-chips"><span class="chip">Architecture</span><span class="chip">Minimalist</span><span class="chip">Studio Ready</span><span class="chip">Geometric</span></div>
+      <div class="tmpl-btns"><a href="https://jamil478.github.io/ZENITH/" target="_blank" class="btn">👁 Preview →</a><a href="https://jamiltrix.gumroad.com/l/PremiumMinimalistArchitectureWebsiteHTMLTemplate" target="_blank" class="btn btn-buy">🛒 Buy Now →</a></div>
+    </div>
+  </div>
+
+  <div class="tmpl-row reveal">
+    <div class="tmpl-num-col">08</div>
+    <div class="tmpl-body">
+      <div class="tmpl-top"><div class="tmpl-name">AXIOM</div><div class="tmpl-tags"><span class="tag tag-cyan">✨ New</span><span class="tag tag-plain">⭐ Popular</span></div></div>
+      <p class="tmpl-desc">Bold brutalist HTML template with sharp contrast and dynamic layout transitions — ideal for startups, tech products and bold creatives.</p>
+      <div class="tmpl-chips"><span class="chip">Brutalist</span><span class="chip">Sharp Contrast</span><span class="chip">Tech Product</span><span class="chip">Startup Ready</span></div>
+      <div class="tmpl-btns"><a href="https://jamil478.github.io/AXIOM/" target="_blank" class="btn">👁 Preview →</a><a href="https://jamiltrix.gumroad.com/l/Html-Templet" target="_blank" class="btn btn-buy">🛒 Buy Now →</a></div>
+    </div>
+  </div>
+
+  <div class="tmpl-row reveal">
+    <div class="tmpl-num-col">09</div>
+    <div class="tmpl-body">
+      <div class="tmpl-top"><div class="tmpl-name">ÆTHER</div><div class="tmpl-tags"><span class="tag tag-red">🔥 Hot</span><span class="tag tag-gold">💎 Premium</span></div></div>
+      <p class="tmpl-desc">Ethereal cosmos-inspired website with deep space visuals and fluid motion. Otherworldly, immersive, and completely unforgettable.</p>
+      <div class="tmpl-chips"><span class="chip">Space Theme</span><span class="chip">Fluid Motion</span><span class="chip">Dark Aesthetic</span><span class="chip">Immersive</span></div>
+      <div class="tmpl-btns"><a href="https://jamil478.github.io/-THER/" target="_blank" class="btn">👁 Preview →</a><a href="https://jamiltrix.gumroad.com/l/WebsiteHTMLTemplate" target="_blank" class="btn btn-buy">🛒 Buy Now →</a></div>
+    </div>
+  </div>
+
+  <div class="tmpl-row reveal">
+    <div class="tmpl-num-col">10</div>
+    <div class="tmpl-body">
+      <div class="tmpl-top"><div class="tmpl-name">AETHER.</div><div class="tmpl-tags"><span class="tag tag-cyan">✨ New</span><span class="tag tag-plain">⭐ Popular</span></div></div>
+      <p class="tmpl-desc">Refined atmospheric portfolio with smooth gradient transitions and layered depth. Elegant, modern, and conversion-ready.</p>
+      <div class="tmpl-chips"><span class="chip">Atmospheric</span><span class="chip">Gradients</span><span class="chip">Layered Depth</span><span class="chip">Modern</span></div>
+      <div class="tmpl-btns"><a href="https://jamil478.github.io/AETHER/" target="_blank" class="btn">👁 Preview →</a><a href="https://jamiltrix.gumroad.com/l/kciwnt" target="_blank" class="btn btn-buy">🛒 Buy Now →</a></div>
+    </div>
+  </div>
+
+  <div class="tmpl-row reveal">
+    <div class="tmpl-num-col">11</div>
+    <div class="tmpl-body">
+      <div class="tmpl-top"><div class="tmpl-name">VANTAGE</div><div class="tmpl-tags"><span class="tag tag-red">🔥 Bestseller</span><span class="tag tag-gold">💎 Premium</span></div></div>
+      <p class="tmpl-desc">Strategic high-converting website with power layouts and bold visual hierarchy — built to impress clients and close deals instantly.</p>
+      <div class="tmpl-chips"><span class="chip">High Converting</span><span class="chip">Bold Hierarchy</span><span class="chip">Client Ready</span><span class="chip">Professional</span></div>
+      <div class="tmpl-btns"><a href="https://jamil478.github.io/VANTAGE/" target="_blank" class="btn">👁 Preview →</a><a href="https://jamiltrix.gumroad.com/l/sbzgfh" target="_blank" class="btn btn-buy">🛒 Buy Now →</a></div>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <div class="footer-logo">JAMIL<span>T</span>RIX</div>
+  <div class="footer-copy">© 2026 · All templates handcrafted ✦</div>
+  <div class="footer-tag">11 Premium Templates</div>
+</footer>
+
+<script>
+  const cur=document.getElementById('cursor');
+  document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';});
+  document.querySelectorAll('a,button,.tmpl-row,.stat-cell,.chip').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cur.classList.add('big'));
+    el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
+  });
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
